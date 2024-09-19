@@ -17,7 +17,8 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">   <children>
+<StackPane prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane prefHeight="600.0" prefWidth="1100.0" styleClass="semiTop-form" stylesheets="@DashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -32,12 +33,12 @@
                                     <Font name="Arial Bold" size="15.0" />
                                  </font>
                               </Label>
-<!--                              <Button fx:id="close" layoutX="1040.0" layoutY="2.0" mnemonicParsing="false" onAction="#close" prefHeight="24.0" prefWidth="50.0" styleClass="close-btn" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="2.0">
+                              <Button fx:id="close" layoutX="1040.0" layoutY="2.0" mnemonicParsing="false"  prefHeight="24.0" prefWidth="50.0" styleClass="close-btn" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="0.7999999999999545" AnchorPane.topAnchor="2.0">
                                  <graphic>
                                     <FontAwesomeIcon glyphName="CLOSE" size="1.2em" />
                                  </graphic>
-                              </Button>-->
-<!--                              <Button fx:id="minimize" layoutX="996.0" layoutY="6.0" mnemonicParsing="false" onAction="#minimize" prefHeight="24.0" prefWidth="50.0" styleClass="minimize-btn" stylesheets="@DashboardDesign.css" AnchorPane.topAnchor="2.0" />-->
+                              </Button>
+                              <Button fx:id="minimize" layoutX="996.0" layoutY="6.0" mnemonicParsing="false"  prefHeight="24.0" prefWidth="50.0" styleClass="minimize-btn" stylesheets="@DashboardDesign.css" AnchorPane.topAnchor="2.0" />
                               <FontAwesomeIcon glyphName="MINUS" layoutX="1015.0" layoutY="22.0" size="1.2em" />
                            </children></AnchorPane>
                      </children>
@@ -58,26 +59,26 @@
                            </font>
                         </Label>
                         <Line endX="84.89288330078125" endY="-1.52587890625E-5" layoutX="113.0" layoutY="178.0" startX="-100.0" />
-                        <Button fx:id="dash_btn" layoutX="8.0" layoutY="193.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="   Dashboard">
+                        <Button fx:id="dash_btn" layoutX="8.0" layoutY="193.0" mnemonicParsing="false"  prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="   Dashboard">
                            <graphic>
                               <FontAwesomeIcon glyphName="DASHBOARD" size="1.5em" />
                            </graphic>
                         </Button>
-                        <Button fx:id="avl_btn" layoutX="11.0" layoutY="241.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="Avilable Novels">
+                        <Button fx:id="avl_btn" layoutX="11.0" layoutY="241.0" mnemonicParsing="false"  prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="Avilable Novels">
                            <graphic>
                               <FontAwesomeIcon glyphName="BOOK" size="1.5em" />
                            </graphic>
                         </Button>
-                        <Button fx:id="shop_btn" layoutX="10.0" layoutY="291.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="   Favorite ">
+                        <Button fx:id="shop_btn" layoutX="10.0" layoutY="291.0" mnemonicParsing="false"  prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="   Favorite ">
                            <graphic>
                               <FontAwesomeIcon glyphName="SHOPPING_CART" size="2em" text="" />
                            </graphic>
                         </Button>
-<!--                        <Button fx:id="logout" layoutX="14.0" layoutY="509.0" mnemonicParsing="false" onAction="#logout" styleClass="logout-btn" stylesheets="@DashboardDesign.css">
+                        <Button fx:id="logout" layoutX="14.0" layoutY="509.0" mnemonicParsing="false"  styleClass="logout-btn" stylesheets="@DashboardDesign.css">
                            <graphic>
                               <FontAwesomeIcon glyphName="SIGN_OUT" size="2em" styleClass="logout-btn" />
                            </graphic>
-                        </Button>-->
+                        </Button>
                      </children>
                   </AnchorPane>
                </left>
@@ -147,7 +148,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="avl_form" layoutX="153.0" layoutY="90.0" prefHeight="548.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="avl_form" layoutX="153.0" layoutY="90.0" prefHeight="548.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="524.0" prefWidth="276.0" stylesheets="@DashboardDesign.css">
                                  <styleClass>
@@ -229,7 +230,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="shopping_form" layoutX="163.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="shopping_form" layoutX="163.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="536.0" prefWidth="880.0" stylesheets="@DashboardDesign.css">
                                  <styleClass>
