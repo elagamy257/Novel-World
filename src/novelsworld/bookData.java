@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  *
- * @author Aya El-agamy
+ * @author Aya El-Agamy
  */
 public class bookData {
   
