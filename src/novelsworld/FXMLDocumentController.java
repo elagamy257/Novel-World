@@ -4,6 +4,8 @@
  */
 package novelsworld;
 
+//import java.awt.Image;
+import java.io.File;
 import java.sql.*;
 //import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -11,27 +13,38 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  *
  * @author SMART-it
  */
+
+ 
+
 public class FXMLDocumentController implements Initializable {
     
     @FXML
     private Button avl_add_btn;
 
     @FXML
-    private TextField avl_auther;
+    private TextField avl_author;
 
     @FXML
     private Button avl_btn;
@@ -52,6 +65,9 @@ public class FXMLDocumentController implements Initializable {
     private TextField avl_id;
 
     @FXML
+    private ImageView avl_image;
+
+    @FXML
     private Button avl_import_btn;
 
     @FXML
@@ -61,25 +77,25 @@ public class FXMLDocumentController implements Initializable {
     private TextField avl_search;
 
     @FXML
-    private TableView<?> avl_table;
+    private TableView<bookData> avl_table;
 
     @FXML
-    private TableColumn<?, ?> avl_table_auther;
+    private TableColumn<bookData, String> avl_table_author;
 
     @FXML
-    private TableColumn<?, ?> avl_table_date;
+    private TableColumn<bookData, String> avl_table_date;
 
     @FXML
-    private TableColumn<?, ?> avl_table_id;
+    private TableColumn<bookData, String> avl_table_id;
 
     @FXML
-    private TableColumn<?, ?> avl_table_price;
+    private TableColumn<bookData, String> avl_table_price;
 
     @FXML
-    private TableColumn<?, ?> avl_table_title;
+    private TableColumn<bookData, String> avl_table_title;
 
     @FXML
-    private TableColumn<?, ?> avl_table_type;
+    private TableColumn<bookData, String> avl_table_type;
 
     @FXML
     private TextField avl_title;
@@ -169,7 +185,7 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox<?> shopping_bookTitle;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_auther;
+    private TableColumn<?, ?> shopping_col_author;
 
     @FXML
     private TableColumn<?, ?> shopping_col_id;
@@ -190,7 +206,7 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane shopping_form;
 
     @FXML
-    private Label shopping_info_auther;
+    private Label shopping_info_author;
 
     @FXML
     private Label shopping_info_date;
@@ -220,6 +236,9 @@ public class FXMLDocumentController implements Initializable {
     private TextField username;
 
     @FXML
+    private Label username1;
+
+    @FXML
     private TextField username_signup;
 
 
@@ -227,8 +246,10 @@ public class FXMLDocumentController implements Initializable {
     
     private Connection conn;
     private PreparedStatement ps;
+    private Statement st;
     private ResultSet re;
     int x=0;
+    private Image image;
     
     
     //login &signup
@@ -261,6 +282,7 @@ public void login() {
             alert.showAndWait();
         } else {
             if (re.next()) {
+                getData.username=username.getText();
                 alert = new Alert(AlertType.INFORMATION);
                 alert.setTitle("Information Message");
                 alert.setHeaderText(null);
@@ -386,7 +408,11 @@ public void logout(){
     }catch(Exception e){e.printStackTrace();}
 }
     
-
+public void displayUsername(){
+//     String user = getData.username;
+//     user = user.substring(0, 1).toUpperCase() + user.substring(1);
+     username1.setText(getData.username);
+ }
 
 public void switchForm(ActionEvent ev) {
         if (ev.getSource() == create_account) {
@@ -420,7 +446,7 @@ public void switchDash(ActionEvent event){
         dash_btn.setStyle("-fx-background-color: transparent");
         shop_btn.setStyle("-fx-background-color: transparent");
 
-
+        availableBooksListData();
 
     }else if(event.getSource() == shop_btn){
         dash_form.setVisible(false);
@@ -435,11 +461,175 @@ public void switchDash(ActionEvent event){
 
     }
 }
+
+
+//avilable
+public ObservableList<bookData> availableBooksListData(){
+        
+        ObservableList<bookData> listData = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM book";
+        
+        conn = DataBase.ConDb();
+        
+        try{
+            ps = conn.prepareStatement(sql);
+            re= ps.executeQuery();
+            
+            bookData bookD;
+            
+            while(re.next()){
+                bookD = new bookData(re.getInt("book_id"), re.getString("title")
+                        , re.getString("author"), re.getString("type")
+                        , re.getDate("pub_date"), re.getDouble("price")
+                        , re.getString("image"));
+                
+                listData.add(bookD);
+            }
+        }catch(Exception e){e.printStackTrace();}
+        return listData;
+    }
     
-    
+private ObservableList<bookData> availableBooksList;
+public void availableBooksShowListData(){
+     availableBooksList = availableBooksListData();
+
+     avl_table_id.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+     avl_table_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+     avl_table_author.setCellValueFactory(new PropertyValueFactory<>("author"));
+     avl_table_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+     avl_table_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+     avl_table_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+     avl_table.setItems(availableBooksList);
+ }
+
+public void availableBooksSelect(){
+        bookData bookD = avl_table.getSelectionModel().getSelectedItem();
+        int num = avl_table.getSelectionModel().getSelectedIndex();
+        
+        if((num - 1) < -1){ return; }
+        
+        avl_id.setText(String.valueOf(bookD.getBookId()));
+        avl_title.setText(bookD.getTitle());
+        avl_author.setText(bookD.getAuthor());
+        avl_type.setText(bookD.getType());
+        avl_date.setValue(LocalDate.parse(String.valueOf(bookD.getDate())));
+        avl_price.setText(String.valueOf(bookD.getPrice()));
+        
+        getData.path = bookD.getImage();
+        
+        String url = "file:" + bookD.getImage();
+ 
+         image = new Image(url,  123, 162, false, true);
+        
+        avl_image.setImage(image);
+        
+        
+    }
+
+public void avaialableBooksInsertImage(){
+
+      FileChooser open = new FileChooser();
+      open.setTitle("Open Image File");
+      open.getExtensionFilters().add(new ExtensionFilter("File Image", "*jpg", "*png"));
+
+      File file = open.showOpenDialog(main_form.getScene().getWindow());
+
+      if(file != null){
+          getData.path = file.getAbsolutePath();
+
+          image = new Image(file.toURI().toString(), 123, 162, false, true);
+          avl_image.setImage(image);
+      }
+
+  }
+
+public void availableBooksAdd(){
+
+    String sql = "INSERT INTO book (book_id, title, author, type, pub_date, price, image) "
+            + "VALUES(?,?,?,?,?,?,?)";
+
+    conn = DataBase.ConDb();
+
+    try{
+        Alert alert;
+
+        if(avl_id.getText().isEmpty()
+                || avl_title.getText().isEmpty()
+                || avl_author.getText().isEmpty()
+                || avl_type.getText().isEmpty()
+                || avl_date.getValue() == null
+                || avl_price.getText().isEmpty()
+                || getData.path == null || getData.path == ""){
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }else{
+            // CHECK IF BOOK ID IS ALREADY EXIST
+            String checkData = "SELECT book_id FROM book WHERE book_id = '"
+                    +avl_id.getText()+"'";
+
+            st = conn.createStatement();
+            re = st.executeQuery(checkData);
+
+            if(re.next()){
+                alert = new Alert(AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Book ID: " + avl_id.getText() + " was already exist!");
+                alert.showAndWait();
+            }else{
+
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, avl_id.getText());
+                ps.setString(2,  avl_title.getText());
+                ps.setString(3, avl_author.getText());
+                ps.setString(4,avl_type.getText());
+                ps.setString(5, String.valueOf(avl_date.getValue()));
+                ps.setString(6, avl_price.getText());
+
+                String uri = getData.path;
+                uri = uri.replace("\\", "\\\\");
+
+                ps.setString(7, uri);
+
+                ps.executeUpdate();
+
+                alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully Added!");
+                alert.showAndWait();
+
+                // TO BE UPDATED THE TABLEVIEW 
+                availableBooksShowListData();
+                // CLEAR FIELDS
+                availableBooksClear();
+            }
+        }
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+public void availableBooksClear(){
+      avl_id.setText("");
+      avl_title.setText("");
+      avl_author.setText("");
+      avl_type.setText("");
+      avl_date.setValue(null);
+      avl_price.setText("");
+
+      getData.path = "";
+
+      avl_image.setImage(null);
+  }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        displayUsername();
+        availableBooksListData();
     }    
     
 }

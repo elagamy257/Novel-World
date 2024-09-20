@@ -131,7 +131,7 @@
                               <Font name="Arial" size="15.0" />
                            </font>
                         </Label>
-                        <Label layoutX="27.0" layoutY="134.0" text="Aya Elagamy">
+                        <Label fx:id="username1" layoutX="27.0" layoutY="134.0" text="Aya Elagamy">
                            <font>
                               <Font name="Arial Black" size="20.0" />
                            </font>
@@ -164,7 +164,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dash_form" layoutX="224.0" layoutY="152.0" prefHeight="548.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dash_form" layoutX="224.0" layoutY="152.0" prefHeight="548.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="3.0" prefHeight="195.0" prefWidth="890.0" stylesheets="@DashboardDesign.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <styleClass>
@@ -230,7 +230,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="avl_form" layoutX="153.0" layoutY="90.0" prefHeight="548.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="avl_form" layoutX="153.0" layoutY="90.0" prefHeight="548.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="524.0" prefWidth="276.0" stylesheets="@DashboardDesign.css">
                                  <styleClass>
@@ -244,8 +244,8 @@
                                           <String fx:value="shadow" />
                                        </styleClass>
                                        <children>
-                                          <ImageView fitHeight="162.0" fitWidth="123.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.7999999999999972" AnchorPane.rightAnchor="0.7999999999999972" AnchorPane.topAnchor="0.0" />
-                                          <Button fx:id="avl_import_btn" layoutX="1.0" layoutY="135.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="123.0" style="-fx-background-radius: 5px;" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="import" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="0.5" AnchorPane.topAnchor="136.0" />
+                                          <ImageView fx:id="avl_image" fitHeight="162.0" fitWidth="123.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.7999999999999972" AnchorPane.rightAnchor="0.7999999999999972" AnchorPane.topAnchor="0.0" />
+                                          <Button fx:id="avl_import_btn" layoutX="1.0" layoutY="135.0" mnemonicParsing="false" onAction="#avaialableBooksInsertImage" prefHeight="26.0" prefWidth="123.0" style="-fx-background-radius: 5px;" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="import" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.5" AnchorPane.rightAnchor="0.5" AnchorPane.topAnchor="136.0" />
                                        </children>
                                     </AnchorPane>
                                     <Label layoutX="29.0" layoutY="198.0" text="Book ID:" textFill="#000000bd">
@@ -260,12 +260,12 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="avl_title" layoutX="96.0" layoutY="231.0" styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
-                                    <Label layoutX="34.0" layoutY="271.0" text="Auther:">
+                                    <Label layoutX="34.0" layoutY="271.0" text="Author:">
                                        <font>
                                           <Font name="Arial" size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="avl_auther" layoutX="96.0" layoutY="267.0" styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
+                                    <TextField fx:id="avl_author" layoutX="96.0" layoutY="267.0" styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
                                     <Label layoutX="48.0" layoutY="308.0" text="Type: ">
                                        <font>
                                           <Font name="Arial" size="15.0" />
@@ -284,9 +284,9 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="avl_price" layoutX="95.0" layoutY="380.0" promptText="\$0.0" styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
-                                    <Button fx:id="avl_add_btn" layoutX="37.0" layoutY="429.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="Add" />
+                                    <Button fx:id="avl_add_btn" layoutX="37.0" layoutY="429.0" mnemonicParsing="false" onAction="#availableBooksAdd" prefHeight="30.0" prefWidth="90.0" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="Add" />
                                     <Button fx:id="avl_update_btn" layoutX="148.0" layoutY="429.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="update-btn" stylesheets="@DashboardDesign.css" text="Update" />
-                                    <Button fx:id="avl_clear_btn" layoutX="37.0" layoutY="468.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="clear-btn" stylesheets="@DashboardDesign.css" text="Clear" />
+                                    <Button fx:id="avl_clear_btn" layoutX="37.0" layoutY="468.0" mnemonicParsing="false" onAction="#availableBooksClear" prefHeight="30.0" prefWidth="90.0" styleClass="clear-btn" stylesheets="@DashboardDesign.css" text="Clear" />
                                     <Button fx:id="avl_delete_btn" layoutX="148.0" layoutY="468.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="90.0" styleClass="delete-btn" stylesheets="@DashboardDesign.css" text="Delete" />
                                  </children>
                               </AnchorPane>
@@ -297,11 +297,11 @@
                                  </styleClass>
                                  <children>
                                     <TextField fx:id="avl_search" layoutX="23.0" layoutY="14.0" prefHeight="30.0" prefWidth="220.0" promptText="search" styleClass="search" stylesheets="@DashboardDesign.css" />
-                                    <TableView fx:id="avl_table" layoutX="8.0" layoutY="66.0" prefHeight="451.0" prefWidth="539.0" styleClass="table-column" stylesheets="@DashboardDesign.css">
+                                    <TableView fx:id="avl_table" layoutX="8.0" layoutY="66.0" onMouseClicked="#availableBooksSelect" prefHeight="451.0" prefWidth="539.0" styleClass="table-column" stylesheets="@DashboardDesign.css">
                                       <columns>
                                         <TableColumn fx:id="avl_table_id" minWidth="0.0" prefWidth="90.0" text="Book ID" />
                                         <TableColumn fx:id="avl_table_title" prefWidth="90.0" text="Book title" />
-                                          <TableColumn fx:id="avl_table_auther" prefWidth="92.79998779296875" text="Auther" />
+                                          <TableColumn fx:id="avl_table_author" prefWidth="92.79998779296875" text="Author" />
                                           <TableColumn fx:id="avl_table_type" prefWidth="96.7999267578125" text="Type" />
                                           <TableColumn fx:id="avl_table_date" prefWidth="92.800048828125" text="Published Date" />
                                           <TableColumn fx:id="avl_table_price" prefWidth="88.79995727539062" text="Price $" />
@@ -324,7 +324,7 @@
                                        <columns>
                                           <TableColumn fx:id="shopping_col_id" minWidth="0.0" prefWidth="140.0" text="Book ID" />
                                           <TableColumn fx:id="shopping_col_title" prefWidth="140.0" text="Book title" />
-                                          <TableColumn fx:id="shopping_col_auther" prefWidth="140.0" text="Auther" />
+                                          <TableColumn fx:id="shopping_col_author" prefWidth="140.0" text="Author" />
                                           <TableColumn fx:id="shopping_col_type" prefWidth="140.0" text="Type" />
                                           <TableColumn fx:id="shopping_col_num" prefWidth="140.0" text="Number" />
                                           <TableColumn fx:id="shopping_col_price" prefWidth="159.99997558593748" text="Price ($)" />
@@ -378,12 +378,12 @@
                                                 <Font name="Arial" size="17.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="24.0" layoutY="89.0" prefHeight="25.0" prefWidth="73.0" stylesheets="@DashboardDesign.css" text="Auther" textFill="WHITE">
+                                          <Label layoutX="24.0" layoutY="89.0" prefHeight="25.0" prefWidth="73.0" stylesheets="@DashboardDesign.css" text="Author" textFill="WHITE">
                                              <font>
                                                 <Font name="Arial" size="15.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="shopping_info_auther" layoutX="115.0" layoutY="85.0" prefHeight="30.0" prefWidth="263.0" styleClass="info-label" stylesheets="@DashboardDesign.css" text="Auther" AnchorPane.topAnchor="87.0">
+                                          <Label fx:id="shopping_info_author" layoutX="115.0" layoutY="85.0" prefHeight="30.0" prefWidth="263.0" styleClass="info-label" stylesheets="@DashboardDesign.css" text="Author" AnchorPane.topAnchor="87.0">
                                              <font>
                                                 <Font name="Arial" size="17.0" />
                                              </font>
