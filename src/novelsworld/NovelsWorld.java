@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author SMART-it
+ * @author Aya El-Agamy
  */
 public class NovelsWorld extends Application {
     
