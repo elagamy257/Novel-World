@@ -17,6 +17,8 @@ import java.time.LocalDate;
 import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.Parent;
@@ -33,7 +35,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
  *
- * @author Aya El-Agamy
+ * @author Aya El-agamy
  */
 
  
@@ -447,6 +449,7 @@ public void switchDash(ActionEvent event){
         shop_btn.setStyle("-fx-background-color: transparent");
 
         availableBooksListData();
+        availableBooksSeach();
 
     }else if(event.getSource() == shop_btn){
         dash_form.setVisible(false);
@@ -625,6 +628,149 @@ public void availableBooksClear(){
 
       avl_image.setImage(null);
   }
+
+public void availableBooksUpdate(){
+
+    String uri = getData.path;
+    uri = uri.replace("\\", "\\\\");
+
+    String sql = "UPDATE book SET title = '"
+            +avl_title.getText()+"', author = '"
+            +avl_author.getText()+"', type = '"
+            +avl_type.getText()+"', pub_date = '"
+            +avl_date.getValue()+"', price = '"
+            +avl_price.getText()+"', image = '"
+            +uri+"' WHERE book_id = '"+avl_id.getText()+"'";
+
+    conn = DataBase.ConDb();
+
+    try{
+        Alert alert;
+
+        if(avl_id.getText().isEmpty()
+                || avl_title.getText().isEmpty()
+                || avl_author.getText().isEmpty()
+                || avl_type.getText().isEmpty()
+                || avl_date.getValue() == null
+                || avl_price.getText().isEmpty()
+                || getData.path == null || getData.path == ""){
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }else{
+            alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to UPDATE Book ID: " + avl_id.getText() + "?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)){
+                st = conn.createStatement();
+                st.executeUpdate(sql);
+
+                alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successful Updated!");
+                alert.showAndWait();
+
+                // TO BE UPDATED THE TABLEVIEW 
+                availableBooksShowListData();
+                // CLEAR FIELDS
+                availableBooksClear();
+            }
+        }
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+public void availableBooksDelete(){
+
+    String sql = "DELETE FROM book WHERE book_id = '"
+            +avl_id.getText()+"'";
+
+    conn = DataBase.ConDb();
+
+    try{
+        Alert alert;
+
+        if(avl_id.getText().isEmpty()
+                || avl_title.getText().isEmpty()
+                || avl_author.getText().isEmpty()
+                || avl_type.getText().isEmpty()
+                || avl_date.getValue() == null
+                || avl_price.getText().isEmpty()
+                || getData.path == null || getData.path == ""){
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please fill all blank fields");
+            alert.showAndWait();
+        }else{
+            alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to DELETE Book ID: " + avl_id.getText() + "?");
+            Optional<ButtonType> option = alert.showAndWait();
+
+            if(option.get().equals(ButtonType.OK)){
+                st = conn.createStatement();
+                st.executeUpdate(sql);
+
+                alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successful Delete!");
+                alert.showAndWait();
+
+                // TO BE UPDATED THE TABLEVIEW 
+                availableBooksShowListData();
+                // CLEAR FIELDS
+                availableBooksClear();
+            }
+        }
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+public void availableBooksSeach(){
+
+    FilteredList<bookData> filter = new FilteredList<>(availableBooksList, e -> true);
+
+    avl_search.textProperty().addListener((Observable, oldValue, newValue) ->{
+
+        filter.setPredicate(predicateBookData -> {
+
+            if(newValue == null || newValue.isEmpty()){
+                return true;
+            }
+
+            String searchKey = newValue.toLowerCase();
+
+            if(predicateBookData.getBookId().toString().contains(searchKey)){
+                return true;
+            }else if(predicateBookData.getTitle().toLowerCase().contains(searchKey)){
+                return true;
+            }else if(predicateBookData.getAuthor().toLowerCase().contains(searchKey)){
+                return true;
+            }else if(predicateBookData.getType().toLowerCase().contains(searchKey)){
+                return true;
+            }else if(predicateBookData.getDate().toString().contains(searchKey)){
+                return true;
+            }else if(predicateBookData.getPrice().toString().contains(searchKey)){
+                return true;
+            }else return false;
+        });
+    });
+
+    SortedList<bookData> sortList = new SortedList(filter);
+    sortList.comparatorProperty().bind(avl_table.comparatorProperty());
+    avl_table.setItems(sortList);
+
+}
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
