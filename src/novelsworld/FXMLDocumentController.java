@@ -121,6 +121,9 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane dash_e;
 
     @FXML
+    private AnchorPane dash_f;
+
+    @FXML
     private AnchorPane dash_form;
 
     @FXML
@@ -220,6 +223,7 @@ public class FXMLDocumentController implements Initializable {
     private TextField username_signup;
 
 
+
     
     private Connection conn;
     private PreparedStatement ps;
@@ -269,11 +273,7 @@ public void login() {
                     signup_form.setVisible(false);
                     main_form.setVisible(  true);
                     
-                Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                stage.show();
+                
                 }
                 
                 
@@ -391,12 +391,10 @@ public void logout(){
 public void switchForm(ActionEvent ev) {
         if (ev.getSource() == create_account) {
             login_form.setVisible(  false);
-            main_form.setVisible(  false);
             signup_form.setVisible(true);
         } else if (ev.getSource() == have_account) {
             login_form.setVisible(true);
             signup_form.setVisible(false);
-            main_form.setVisible(  false);
         }
     }
 

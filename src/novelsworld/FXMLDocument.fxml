@@ -21,7 +21,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="novelsworld.FXMLDocumentController">
    <children>
-      <AnchorPane fx:id="login_form" onDragDetected="#switchForm" onMouseClicked="#switchForm" prefHeight="600.0" prefWidth="800.0" visible="false">
+      <AnchorPane fx:id="login_form" onDragDetected="#switchForm" onMouseClicked="#switchForm" prefHeight="600.0" prefWidth="800.0">
          <children>
             <ImageView fitHeight="600.0" fitWidth="429.0" layoutX="54.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="671.0" AnchorPane.topAnchor="0.0">
                <image>
@@ -100,7 +100,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" visible="false">
          <children>
             <BorderPane prefHeight="600.0" prefWidth="1100.0" styleClass="semiTop-form" stylesheets="@DashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -147,7 +147,7 @@
                               <FontAwesomeIcon glyphName="BOOK" size="1.5em" />
                            </graphic>
                         </Button>
-                        <Button fx:id="shop_btn" layoutX="10.0" layoutY="291.0" mnemonicParsing="false" onAction="#switchDash" prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="   Favorite ">
+                        <Button fx:id="shop_btn" layoutX="10.0" layoutY="291.0" mnemonicParsing="false" onAction="#switchDash" prefHeight="40.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@DashboardDesign.css" text="Shopping">
                            <graphic>
                               <FontAwesomeIcon glyphName="SHOPPING_CART" size="2em" text="" />
                            </graphic>
@@ -166,68 +166,71 @@
                      <children>
                         <AnchorPane fx:id="dash_form" layoutX="224.0" layoutY="152.0" prefHeight="548.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <AnchorPane layoutX="3.0" prefHeight="250.0" prefWidth="886.0" stylesheets="@DashboardDesign.css">
+                              <AnchorPane layoutX="3.0" prefHeight="195.0" prefWidth="890.0" stylesheets="@DashboardDesign.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <AnchorPane fx:id="dash_a" layoutX="14.0" layoutY="11.0" prefHeight="263.0" prefWidth="163.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css">
+                                    <AnchorPane fx:id="dash_a" layoutX="28.0" layoutY="11.0" prefHeight="197.0" prefWidth="110.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="750.0" AnchorPane.topAnchor="2.0">
                                        <children>
-                                          <ImageView fitHeight="258.0" fitWidth="151.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="190.0" fitWidth="110.0" layoutX="2.0" layoutY="1.6" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="1.0">
                                              <image>
                                                 <Image url="@image%20book/16.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="dash_b" layoutX="193.0" layoutY="8.0" prefHeight="270.0" prefWidth="160.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css">
+                                    <AnchorPane fx:id="dash_b" layoutX="186.0" layoutY="2.0" prefHeight="190.0" prefWidth="110.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="2.0">
                                        <children>
-                                          <ImageView fitHeight="260.0" fitWidth="143.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@image%20book/b.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </children>
-                                    </AnchorPane>
-                                    <AnchorPane fx:id="dash_c" layoutX="377.0" layoutY="8.0" prefHeight="270.0" prefWidth="160.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css">
-                                       <children>
-                                          <ImageView fitHeight="260.0" fitWidth="143.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="190.0" fitWidth="110.0" layoutX="2.0" layoutY="1.6" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="1.0">
                                              <image>
                                                 <Image url="@image%20book/m.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="dash_d" layoutX="547.0" layoutY="7.0" prefHeight="270.0" prefWidth="160.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css">
+                                    <AnchorPane fx:id="dash_c" layoutX="322.0" layoutY="2.0" prefHeight="190.0" prefWidth="110.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="458.0" AnchorPane.topAnchor="2.0">
                                        <children>
-                                          <ImageView fitHeight="254.0" fitWidth="159.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="190.0" fitWidth="110.0" layoutX="2.0" layoutY="1.6" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="1.0">
                                              <image>
-                                                <Image url="@image%20book/6.jpg" />
+                                                <Image url="@image%20book/b.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
                                     </AnchorPane>
-                                    <AnchorPane fx:id="dash_e" layoutX="718.0" layoutY="5.0" prefHeight="270.0" prefWidth="160.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css">
+                                    <AnchorPane fx:id="dash_d" layoutX="451.0" layoutY="2.0" prefHeight="190.0" prefWidth="110.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="316.0" AnchorPane.topAnchor="2.0">
                                        <children>
-                                          <ImageView fitHeight="258.0" fitWidth="142.0" layoutX="8.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="190.0" fitWidth="110.0" layoutX="2.0" layoutY="1.6" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.39999999999997726" AnchorPane.topAnchor="1.0">
                                              <image>
-                                                <Image url="@image%20book/3.jpg" />
+                                                <Image url="@image%20book/i.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="dash_e" layoutX="582.0" layoutY="2.0" prefHeight="190.0" prefWidth="110.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css" AnchorPane.leftAnchor="616.8" AnchorPane.rightAnchor="174.0" AnchorPane.topAnchor="2.0">
+                                       <children>
+                                          <ImageView fitHeight="191.0" fitWidth="110.0" layoutX="2.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.876196289062506" AnchorPane.topAnchor="14.0">
+                                             <image>
+                                                <Image url="@image%20book/11.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane fx:id="dash_f" layoutX="752.0" layoutY="8.0" prefHeight="193.0" prefWidth="96.0" style="-fx-background-color: #837163;" styleClass="card-form" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="2.0">
+                                       <children>
+                                          <ImageView fitHeight="190.0" fitWidth="110.0" layoutX="2.0" layoutY="1.6" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="1.0">
+                                             <image>
+                                                <Image url="@image%20book/h.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="20.0" layoutY="15.0" stylesheets="@DashboardDesign.css">
-                                 <styleClass>
-                                    <String fx:value="white-bg" />
-                                    <String fx:value="shadow" />
-                                 </styleClass>
-                              </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="avl_form" layoutX="153.0" layoutY="90.0" prefHeight="548.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="avl_form" layoutX="153.0" layoutY="90.0" prefHeight="548.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="524.0" prefWidth="276.0" stylesheets="@DashboardDesign.css">
                                  <styleClass>
@@ -309,7 +312,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="shopping_form" layoutX="163.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="shopping_form" layoutX="163.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="536.0" prefWidth="880.0" stylesheets="@DashboardDesign.css">
                                  <styleClass>
