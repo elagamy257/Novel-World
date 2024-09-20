@@ -6,7 +6,7 @@ package novelsworld;
 
 /**
  *
- * @author Aya El-agamy
+ * @author Aya El-Agamy
  */
 public class getData {
      
