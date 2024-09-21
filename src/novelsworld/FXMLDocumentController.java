@@ -775,7 +775,7 @@ public void availableBooksSeach(){
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         displayUsername();
-        availableBooksListData();
+        availableBooksShowListData();
     }    
     
 }
