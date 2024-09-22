@@ -170,17 +170,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-border-width:.8px;
 }
 
-/*.label_take{
-    -fx-background-color:#fff;
-    -fx-padding:0px 0px 0px 8px;
-    -fx-font-size:14px;
-    -fx-border-color:#000;
-    -fx-border-radius:5px;
-    -fx-border-width:.4px;
-    -fx-background-radius:5px;
-}*/
-
-
 .search{
     -fx-background-color: transparent;
     -fx-font-size: 13px;
