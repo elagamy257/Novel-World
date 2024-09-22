@@ -468,6 +468,7 @@ public void switchDash(ActionEvent event){
         purchaseBookTitle();
         purchaseShowCustomerListData();
         purchaseDisplayQTY();
+        purchaseDisplayTotal();
 
 
 
@@ -780,6 +781,8 @@ public void availableBooksSeach(){
 
 }
 
+//shopping
+
 public void purchaseBookId(){
 
     String sql = "SELECT book_id FROM book";
@@ -1004,13 +1007,78 @@ public void purchaseAdd(){
 
             ps.executeUpdate();
 
-//                purchaseDisplayTotal();
+                purchaseDisplayTotal();
             purchaseShowCustomerListData();
         }
     }catch(Exception e){e.printStackTrace();}
 }
-    
 
+private double displayTotal;
+public void purchaseDisplayTotal(){
+    purchasecustomerId();
+
+    String sql = "SELECT SUM(price) FROM customer WHERE customer_id = '"+customerId+"'";
+
+    conn = DataBase.ConDb();
+
+    try{
+       ps = conn.prepareStatement(sql);
+       re = ps.executeQuery();
+
+        if(re.next()){
+            displayTotal = re.getDouble("SUM(price)");
+        }
+
+        shopping_Total.setText("$" + String.valueOf(displayTotal));
+
+    }catch(Exception e){e.printStackTrace();}
+
+}
+    
+public void purchasePay(){
+
+     String sql = "INSERT INTO customer_info (customer_id, total, date) "
+             + "VALUES(?,?,?)";
+
+     conn = DataBase.ConDb();
+
+     try{
+         Alert alert;
+         if(displayTotal == 0){
+             alert = new Alert(AlertType.ERROR);
+             alert.setTitle("Error message");
+             alert.setHeaderText(null);
+             alert.setContentText("Invalid :3");
+             alert.showAndWait();
+         }else{
+             alert = new Alert(AlertType.CONFIRMATION);
+             alert.setTitle("Confirmation message");
+             alert.setHeaderText(null);
+             alert.setContentText("Are you sure?");
+             Optional<ButtonType> option = alert.showAndWait();
+
+             if(option.get().equals(ButtonType.OK)){
+                 ps = conn.prepareStatement(sql);
+                 ps.setString(1, String.valueOf(customerId));
+                 ps.setString(2, String.valueOf(displayTotal));
+
+                 Date date = new Date();
+                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+                 ps.setString(3, String.valueOf(sqlDate));
+
+                 ps.executeUpdate();
+
+                 alert = new Alert(AlertType.INFORMATION);
+                 alert.setTitle("Information message");
+                 alert.setHeaderText(null);
+                 alert.setContentText("Successful!");
+                 alert.showAndWait();
+             }
+         }
+     }catch(Exception e){e.printStackTrace();}
+
+ }
 
 
 
@@ -1024,6 +1092,7 @@ public void purchaseAdd(){
         purchaseBookTitle();
         purchaseShowCustomerListData();
         purchaseDisplayQTY();
+        purchaseDisplayTotal();
     }    
     
 }
