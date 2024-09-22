@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -185,24 +186,27 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private ComboBox<?> shopping_bookTitle;
+    
+    @FXML
+    private Spinner<Integer> shopping_qun;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_author;
+    private TableColumn<customerData, String> shopping_col_author;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_id;
+    private TableColumn<customerData, String> shopping_col_id;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_num;
+    private TableColumn<customerData, String> shopping_col_num;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_price;
+    private TableColumn<customerData, String> shopping_col_price;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_title;
+    private TableColumn<customerData, String> shopping_col_title;
 
     @FXML
-    private TableColumn<?, ?> shopping_col_type;
+    private TableColumn<customerData, String> shopping_col_type;
 
     @FXML
     private AnchorPane shopping_form;
@@ -226,7 +230,7 @@ public class FXMLDocumentController implements Initializable {
     private Button shopping_paybtn;
 
     @FXML
-    private TableView<?> shopping_table;
+    private TableView<customerData> shopping_table;
 
     @FXML
     private AnchorPane signup_form;
@@ -459,6 +463,11 @@ public void switchDash(ActionEvent event){
         shop_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
         avl_btn.setStyle("-fx-background-color: transparent");
         dash_btn.setStyle("-fx-background-color: transparent");
+        
+        purchaseBookId();
+        purchaseBookTitle();
+        purchaseShowCustomerListData();
+        purchaseDisplayQTY();
 
 
 
@@ -771,11 +780,250 @@ public void availableBooksSeach(){
 
 }
 
+public void purchaseBookId(){
+
+    String sql = "SELECT book_id FROM book";
+
+    conn = DataBase.ConDb();
+
+    try{
+        ps = conn.prepareStatement(sql);
+        re = ps.executeQuery();
+
+        ObservableList listData = FXCollections.observableArrayList();
+
+        while(re.next()){
+            listData.add(re.getString("book_id"));
+        }
+
+        shopping_bookID.setItems(listData);
+            purchaseBookTitle();
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+public void purchaseBookTitle(){
+
+String sql = "SELECT book_id, title FROM book WHERE book_id = '"
+        +shopping_bookID.getSelectionModel().getSelectedItem()+"'";
+
+conn = DataBase.ConDb();
+
+try{
+    ps = conn.prepareStatement(sql);
+    re = ps.executeQuery();
+
+    ObservableList listData = FXCollections.observableArrayList();
+
+    while(re.next()){
+        listData.add(re.getString("title"));
+    }
+
+    shopping_bookTitle.setItems(listData);
+
+    purchaseBookInfo();
+
+}catch(Exception e){e.printStackTrace();}
+
+}
+
+public void purchaseBookInfo(){
+
+    String sql = "SELECT * FROM book WHERE title = '"
+            +shopping_bookTitle.getSelectionModel().getSelectedItem()+"'";
+
+    conn = DataBase.ConDb();
+
+    String bookId = "";
+    String title = "";
+    String author = "";
+    String type = "";
+    String date = "";
+
+    try{
+        ps = conn.prepareStatement(sql);
+        re = ps.executeQuery();
+
+        if(re.next()){
+            bookId = re.getString("book_id");
+            title = re.getString("title");
+            author = re.getString("author");
+            type = re.getString("type");
+            date = re.getString("pub_date");
+        }
+
+        shopping_info_id.setText(bookId);
+        shopping_info_title.setText(title);
+        shopping_info_author.setText(author);
+        shopping_info_type.setText(type);
+        shopping_info_date.setText(date);
+
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+public ObservableList<customerData> purchaseListData(){
+    purchasecustomerId();
+    String sql = "SELECT * FROM customer WHERE customer_id = '"+customerId+"'";
+
+    ObservableList<customerData> listData = FXCollections.observableArrayList();
+
+    conn = DataBase.ConDb();
+
+    try{
+        ps = conn.prepareStatement(sql);
+        re = ps.executeQuery();
+
+        customerData customerD;
+
+        while(re.next()){
+            customerD = new customerData(re.getInt("customer_id")
+                    , re.getInt("book_id")
+                    , re.getString("title")
+                    , re.getString("author")
+                    , re.getString("type")
+                    , re.getInt("quantity")
+                    , re.getDouble("price")
+                    , re.getDate("date"));
+
+            listData.add(customerD);
+        }
+
+    }catch(Exception e){e.printStackTrace();}
+    return listData;
+}
+
+private int customerId;
+public void purchasecustomerId(){
+
+    String sql = "SELECT MAX(customer_id) FROM customer";
+    int checkCID = 0 ;
+    conn = DataBase.ConDb();
+
+try{
+    ps = conn.prepareStatement(sql);
+    re = ps.executeQuery();
+
+        if(re.next()){
+            customerId = re.getInt("MAX(customer_id)");
+        }
+
+        String checkData = "SELECT MAX(customer_id) FROM customer_info";
+
+        ps = conn.prepareStatement(checkData );
+        re = ps.executeQuery();
+
+        if(re.next()){
+            checkCID = re.getInt("MAX(customer_id)");
+        }
+
+        if(customerId == 0){
+            customerId += 1;
+        }else if(checkCID == customerId){
+            customerId = checkCID + 1;
+        }
+
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+private ObservableList<customerData> purchaseCustomerList;
+public void purchaseShowCustomerListData(){
+    purchaseCustomerList = purchaseListData();
+
+    shopping_col_id.setCellValueFactory(new PropertyValueFactory<>("bookId"));
+    shopping_col_title.setCellValueFactory(new PropertyValueFactory<>("title"));
+    shopping_col_author.setCellValueFactory(new PropertyValueFactory<>("author"));
+    shopping_col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
+    shopping_col_num.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    shopping_col_price.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+     shopping_table.setItems(purchaseCustomerList);
+}
+
+private SpinnerValueFactory<Integer> spinner;
+    
+public void purchaseDisplayQTY(){
+    spinner = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10, 0);
+    shopping_qun.setValueFactory(spinner);
+}
+private int qty;
+public void purhcaseQty(){
+    qty = shopping_qun.getValue();
+}
+
+private double totalP;
+public void purchaseAdd(){
+    purchasecustomerId();
+
+    String sql = "INSERT INTO customer (customer_id, book_id, title, author, type, quantity, price, date) "
+            + "VALUES(?,?,?,?,?,?,?,?)";
+
+    conn = DataBase.ConDb();
+
+    try{
+        Alert alert;
+
+        if(shopping_bookTitle.getSelectionModel().getSelectedItem() == null
+                || shopping_bookID.getSelectionModel().getSelectedItem() == null){
+            alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error message");
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose book first");
+            alert.showAndWait();
+        }else{
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, String.valueOf(customerId));
+            ps.setString(2, shopping_info_id.getText());
+            ps.setString(3, shopping_info_title.getText());
+            ps.setString(4, shopping_info_author.getText());
+            ps.setString(5, shopping_info_type.getText());
+            ps.setString(6, String.valueOf(qty));
+
+            String checkData = "SELECT title, price FROM book WHERE title = '"
+                    +shopping_bookTitle.getSelectionModel().getSelectedItem()+"'";
+
+            double priceD = 0;
+
+            st = conn.createStatement();
+            re = st.executeQuery(checkData);
+
+            if(re.next()){
+                priceD = re.getDouble("price");
+            }
+
+            totalP = (qty * priceD);
+
+            ps.setString(7, String.valueOf(totalP));
+
+            Date date = new Date();
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
+            ps.setString(8, String.valueOf(sqlDate));
+
+            ps.executeUpdate();
+
+//                purchaseDisplayTotal();
+            purchaseShowCustomerListData();
+        }
+    }catch(Exception e){e.printStackTrace();}
+}
+    
+
+
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         displayUsername();
-        availableBooksListData();
+        availableBooksShowListData();
+        purchaseBookId();
+        purchaseBookTitle();
+        purchaseShowCustomerListData();
+        purchaseDisplayQTY();
     }    
     
 }

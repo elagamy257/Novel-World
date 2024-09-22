@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -21,7 +22,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="novelsworld.FXMLDocumentController">
    <children>
-      <AnchorPane fx:id="login_form" onDragDetected="#switchForm" onMouseClicked="#switchForm" prefHeight="600.0" prefWidth="800.0">
+      <AnchorPane fx:id="login_form" onDragDetected="#switchForm" onMouseClicked="#switchForm" prefHeight="600.0" prefWidth="800.0" visible="false">
          <children>
             <ImageView fitHeight="600.0" fitWidth="429.0" layoutX="54.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="671.0" AnchorPane.topAnchor="0.0">
                <image>
@@ -100,7 +101,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0" visible="false">
+        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane prefHeight="600.0" prefWidth="1100.0" styleClass="semiTop-form" stylesheets="@DashboardDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -164,7 +165,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane fx:id="dash_form" layoutX="224.0" layoutY="152.0" prefHeight="548.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="dash_form" layoutX="224.0" layoutY="152.0" prefHeight="548.0" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="3.0" prefHeight="195.0" prefWidth="890.0" stylesheets="@DashboardDesign.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <styleClass>
@@ -312,7 +313,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="shopping_form" layoutX="163.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="shopping_form" layoutX="163.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="536.0" prefWidth="880.0" stylesheets="@DashboardDesign.css">
                                  <styleClass>
@@ -338,24 +339,24 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <ComboBox fx:id="shopping_bookID" layoutX="109.0" layoutY="28.0" prefWidth="150.0" promptText="Choose..." styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
+                                    <ComboBox fx:id="shopping_bookID" layoutX="109.0" layoutY="28.0" onAction="#purchaseBookId" prefWidth="150.0" promptText="Choose..." styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
                                     <Label layoutX="31.0" layoutY="73.0" text="Book Title:">
                                        <font>
                                           <Font name="Arial" size="15.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="shopping_bookTitle" layoutX="109.0" layoutY="69.0" prefWidth="150.0" promptText="Choose..." styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
-                                    <Label layoutX="54.0" layoutY="131.0" text="Total: ">
+                                    <ComboBox fx:id="shopping_bookTitle" layoutX="109.0" layoutY="69.0" onAction="#purchaseBookTitle" prefWidth="150.0" promptText="Choose..." styleClass="textfield_take" stylesheets="@DashboardDesign.css" />
+                                    <Label layoutX="238.0" layoutY="180.0" text="Total: ">
                                        <font>
-                                          <Font name="Arial" size="15.0" />
+                                          <Font name="Arial" size="18.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="shopping_Total" layoutX="103.0" layoutY="122.0" prefHeight="35.0" prefWidth="134.0" text="  $0.0">
+                                    <Label fx:id="shopping_Total" layoutX="280.0" layoutY="171.0" prefHeight="35.0" prefWidth="134.0" text="  $0.0">
                                        <font>
                                           <Font name="Arial" size="20.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="shopping_addbtn" layoutX="297.0" layoutY="50.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="70.0" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="Add" />
+                                    <Button fx:id="shopping_addbtn" layoutX="297.0" layoutY="50.0" mnemonicParsing="false" onAction="#purchaseAdd" prefHeight="38.0" prefWidth="70.0" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="Add" />
                                     <AnchorPane layoutX="489.0" layoutY="-4.0" prefHeight="232.0" prefWidth="446.0" styleClass="info" stylesheets="@DashboardDesign.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                           <Label layoutX="32.0" layoutY="12.0" prefHeight="24.0" prefWidth="65.0" stylesheets="@DashboardDesign.css" text="Book ID:" textFill="WHITE">
@@ -410,12 +411,18 @@
                                           </Label>
                                        </children>
                                     </AnchorPane>
-                                    <Button fx:id="shopping_paybtn" layoutX="169.0" layoutY="177.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="138.0" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="Pay" />
+                                    <Button fx:id="shopping_paybtn" layoutX="33.0" layoutY="172.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="138.0" styleClass="add-btn" stylesheets="@DashboardDesign.css" text="Pay" />
                                     <Label layoutX="39.0" layoutY="33.0" prefHeight="24.0" prefWidth="65.0" stylesheets="@DashboardDesign.css" text="Book ID:">
                                        <font>
                                           <Font name="Arial" size="15.0" />
                                        </font>
                                     </Label>
+                                    <Label layoutX="31.0" layoutY="116.0" text="Quantity: ">
+                                       <font>
+                                          <Font name="Arial" size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="shopping_qun" layoutX="110.0" layoutY="112.0" onMouseClicked="#purhcaseQty" prefHeight="29.0" prefWidth="108.0" />
                                  </children>
                               </AnchorPane>
                            </children>
