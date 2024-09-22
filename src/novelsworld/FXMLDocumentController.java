@@ -121,11 +121,17 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Hyperlink create_account;
 
-    @FXML
+     @FXML
     private AnchorPane dash_a;
 
     @FXML
+    private AnchorPane dash_a1;
+
+    @FXML
     private AnchorPane dash_b;
+
+    @FXML
+    private AnchorPane dash_b1;
 
     @FXML
     private Button dash_btn;
@@ -134,13 +140,25 @@ public class FXMLDocumentController implements Initializable {
     private AnchorPane dash_c;
 
     @FXML
+    private AnchorPane dash_c1;
+
+    @FXML
     private AnchorPane dash_d;
+
+    @FXML
+    private AnchorPane dash_d1;
 
     @FXML
     private AnchorPane dash_e;
 
     @FXML
+    private AnchorPane dash_e1;
+
+    @FXML
     private AnchorPane dash_f;
+
+    @FXML
+    private AnchorPane dash_f1;
 
     @FXML
     private AnchorPane dash_form;
