@@ -24,6 +24,9 @@ import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -249,6 +252,29 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private TableView<customerData> shopping_table;
+    
+     @FXML
+    private Label incom_a;
+
+    @FXML
+    private Label incom_b;
+
+    @FXML
+    private Button incom_btn;
+
+    @FXML
+    private Label incom_c;
+
+    @FXML
+    private AnchorPane incom_form;
+    
+    @FXML
+    private BarChart<?, ?> custom_chart;
+    
+    
+    @FXML
+    private AreaChart<?, ?> income_Chart;
+
 
     @FXML
     private AnchorPane signup_form;
@@ -438,6 +464,8 @@ public void displayUsername(){
      username1.setText(getData.username);
  }
 
+//linking
+
 public void switchForm(ActionEvent ev) {
         if (ev.getSource() == create_account) {
             login_form.setVisible(  false);
@@ -454,33 +482,39 @@ public void switchDash(ActionEvent event){
         dash_form.setVisible(true);
         avl_form.setVisible(false);
         shopping_form.setVisible(false);
+        incom_form.setVisible(false);
 
         dash_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
         avl_btn.setStyle("-fx-background-color: transparent");
         shop_btn.setStyle("-fx-background-color: transparent");
+        incom_btn.setStyle("-fx-background-color: transparent");
 
 
 
     }else if(event.getSource() == avl_btn){
-        dash_form.setVisible(false);
         avl_form.setVisible(true);
+        dash_form.setVisible(false);
         shopping_form.setVisible(false);
+        incom_form.setVisible(false);
 
         avl_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
         dash_btn.setStyle("-fx-background-color: transparent");
         shop_btn.setStyle("-fx-background-color: transparent");
+        incom_btn.setStyle("-fx-background-color: transparent");
 
         availableBooksListData();
         availableBooksSeach();
 
     }else if(event.getSource() == shop_btn){
-        dash_form.setVisible(false);
-        avl_form.setVisible(false);
         shopping_form.setVisible(true);
+        dash_form.setVisible(false);
+        avl_form.setVisible(false);       
+        incom_form.setVisible(false);
 
         shop_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
         avl_btn.setStyle("-fx-background-color: transparent");
         dash_btn.setStyle("-fx-background-color: transparent");
+        incom_btn.setStyle("-fx-background-color: transparent");
         
         purchaseBookId();
         purchaseBookTitle();
@@ -490,7 +524,22 @@ public void switchDash(ActionEvent event){
 
 
 
-    }
+    }else if(event.getSource() == incom_btn){
+        incom_form.setVisible(true);
+        dash_form.setVisible(false);
+        avl_form.setVisible(false);
+        shopping_form.setVisible(false);
+        
+
+        incom_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
+        avl_btn.setStyle("-fx-background-color: transparent");
+        dash_btn.setStyle("-fx-background-color: transparent");
+        shop_btn.setStyle("-fx-background-color: transparent");
+        
+        incom_A();
+        incom_B();
+        incom_C();
+}
 }
 
 
@@ -1098,6 +1147,111 @@ public void purchasePay(){
 
  }
 
+//incom
+
+public void incom_A(){
+
+      String sql = "SELECT COUNT(id) FROM book";
+
+      conn = DataBase.ConDb();
+      int count_a = 0;
+      try{
+          ps = conn.prepareStatement(sql);
+          re = ps.executeQuery();
+
+          if(re.next()){
+              count_a = re.getInt("COUNT(id)");
+          }
+
+          incom_a.setText(String.valueOf(count_a));
+
+      }catch(Exception e){e.printStackTrace();}
+  }
+  
+public void incom_B(){
+
+  String sql = "SELECT SUM(total) FROM customer_info";
+
+  conn = DataBase.ConDb();
+  double sumTotal = 0;
+  try{
+      ps = conn.prepareStatement(sql);
+      re = ps.executeQuery();
+
+      if(re.next()){
+          sumTotal = re.getDouble("SUM(total)");
+      }
+
+      incom_b.setText("$" + String.valueOf(sumTotal));
+
+  }catch(Exception e){e.printStackTrace();}
+}
+
+public void incom_C(){
+      String sql = "SELECT COUNT(id) FROM customer_info";
+
+      conn = DataBase.ConDb();
+        int count_c = 0;
+        try{
+            ps = conn.prepareStatement(sql);
+            re = ps.executeQuery();
+
+          if(re.next()){
+              count_c = re.getInt("COUNT(id)");
+          }
+
+          incom_c.setText(String.valueOf(count_c));
+
+      }catch(Exception e){e.printStackTrace();}
+
+  }
+
+public void IncomeChart(){
+
+    income_Chart.getData().clear();
+
+    String sql = "SELECT date, SUM(total) FROM customer_info GROUP BY date ORDER BY TIMESTAMP(date) ASC LIMIT 6";
+
+    conn = DataBase.ConDb();
+
+    try{
+        XYChart.Series chart = new XYChart.Series();
+
+        ps = conn.prepareStatement(sql);
+        re = ps.executeQuery();
+
+        while(re.next()){
+            chart.getData().add(new XYChart.Data(re.getString(1), re.getInt(2)));
+        }
+
+        income_Chart.getData().add(chart);
+
+    }catch(Exception e){e.printStackTrace();}
+
+}
+
+public void CustomerChart(){
+
+      custom_chart.getData().clear();
+
+      String sql = "SELECT date, COUNT(id) FROM customer_info GROUP BY date ORDER BY TIMESTAMP(date) ASC LIMIT 4";
+
+      conn = DataBase.ConDb();
+
+      try{
+          XYChart.Series chart = new XYChart.Series();
+
+          ps = conn.prepareStatement(sql);
+          re = ps.executeQuery();
+
+          while(re.next()){
+              chart.getData().add(new XYChart.Data(re.getString(1), re.getInt(2)));
+          }
+
+          custom_chart.getData().add(chart);
+
+      }catch(Exception e){e.printStackTrace();}
+}
 
 
 
@@ -1105,6 +1259,9 @@ public void purchasePay(){
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         displayUsername();
+        incom_A();
+        incom_B();
+        incom_C();
         availableBooksShowListData();
         purchaseBookId();
         purchaseBookTitle();
