@@ -67,7 +67,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .nav-btn:hover{
-    -fx-background-color:#000;
+    -fx-background-color:linear-gradient(to top right, #3c2c21, #93773e);
     -fx-background-radius:5px;
 }
 
