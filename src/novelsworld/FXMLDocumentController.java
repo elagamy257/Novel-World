@@ -484,7 +484,7 @@ public void switchDash(ActionEvent event){
         shopping_form.setVisible(false);
         incom_form.setVisible(false);
 
-        dash_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
+        dash_btn.setStyle("-fx-background-color:linear-gradient(to top right, #3c2c21, #93773e);");
         avl_btn.setStyle("-fx-background-color: transparent");
         shop_btn.setStyle("-fx-background-color: transparent");
         incom_btn.setStyle("-fx-background-color: transparent");
@@ -497,7 +497,7 @@ public void switchDash(ActionEvent event){
         shopping_form.setVisible(false);
         incom_form.setVisible(false);
 
-        avl_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
+        avl_btn.setStyle("-fx-background-color:linear-gradient(to top right, #3c2c21, #93773e);");
         dash_btn.setStyle("-fx-background-color: transparent");
         shop_btn.setStyle("-fx-background-color: transparent");
         incom_btn.setStyle("-fx-background-color: transparent");
@@ -511,7 +511,7 @@ public void switchDash(ActionEvent event){
         avl_form.setVisible(false);       
         incom_form.setVisible(false);
 
-        shop_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
+        shop_btn.setStyle("-fx-background-color:linear-gradient(to top right, #3c2c21, #93773e);");
         avl_btn.setStyle("-fx-background-color: transparent");
         dash_btn.setStyle("-fx-background-color: transparent");
         incom_btn.setStyle("-fx-background-color: transparent");
@@ -530,7 +530,6 @@ public void switchDash(ActionEvent event){
         avl_form.setVisible(false);
         shopping_form.setVisible(false);
         
-
         incom_btn.setStyle("-fx-background-color:linear-gradient(to top right, #72513c, #ab853e);");
         avl_btn.setStyle("-fx-background-color: transparent");
         dash_btn.setStyle("-fx-background-color: transparent");
@@ -539,6 +538,8 @@ public void switchDash(ActionEvent event){
         incom_A();
         incom_B();
         incom_C();
+        IncomeChart();
+        CustomerChart();
 }
 }
 
@@ -1258,7 +1259,8 @@ public void CustomerChart(){
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        displayUsername();
+
+//        displayUsername();
         incom_A();
         incom_B();
         incom_C();
