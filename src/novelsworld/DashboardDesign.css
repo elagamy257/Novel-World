@@ -48,7 +48,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .nav-form{
-    -fx-background-color:linear-gradient(to bottom right,  #9c8464, #324f6b);
+    -fx-background-color:linear-gradient(to top right, #3c2c21, #93773e);
 }
 
 .edit-btn{
