@@ -48,7 +48,7 @@ and track sales revenue.
 <div align = center>
 
 Login <br>
-![Customer Login](image\login.jpg "Customer Login") <br>
+![Customer Login](IMG-20240927-WA0068.jpg "Customer Login") <br>
 Sign up <br>
 ![Customer Sign up](image\signup.jpg "Customer Sign up")  <br>
 
