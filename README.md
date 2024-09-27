@@ -26,24 +26,6 @@ and track sales revenue.
 <li> Popular Books Section:<br>
   A dedicated display of trending novels from renowned authors.</li>
 
-## Main Interfaces:
-
-<li> Home:<br>
-   - Displays popular novels recently appreciated by readers. <br>
-   - Features highlighted books from favorite authors, encouraging exploration. <br></li>
-
-<li> Available Books:<br>
-   - Lists all books available on the site. <br>
-   - Includes a search bar for easy access and allows admins to manage book entries. <br></li>
-
-<li>  Shopping:<br>
-   - Users can search for books by ID or title and specify desired quantities. <br>
-   - A direct "Pay" button facilitates the checkout process. <br></li>
-
-<li> Income:<br>
-   - Enables administrators to monitor revenue accurately. <br>
-   - Shows customer counts and available books, with a chart for visual financial representation. <br></li>
-
 ## Screenshots:
 <div align = center>
 
@@ -52,18 +34,31 @@ Login <br>
 Sign up <br>
 ![Customer Sign up](IMG-20240927-WA0068.jpg "Customer Sign up")  <br>
 
-## Dashboard Window
+## Main Interfaces:
 
-Home Window <br>
+<li> Home:<br>
+   - Displays popular novels recently appreciated by readers. <br>
+   - Features highlighted books from favorite authors, encouraging exploration. <br></li>
+   
 ![Main window](IMG-20240927-WA0070.jpg "Main window") <br>
-Avaliable Book<br>
+
+<li> Available Books:<br>
+   - Lists all books available on the site. <br>
+   - Includes a search bar for easy access and allows admins to manage book entries. <br></li>
+   
 ![avaliable Novels](IMG-20240927-WA0071.jpg "avaliable Novels") <br>
-Shopping Window <br>
+
+<li>  Shopping:<br>
+   - Users can search for books by ID or title and specify desired quantities. <br>
+   - A direct "Pay" button facilitates the checkout process. <br></li>
+   
 ![Customer Info](IMG-20240927-WA0072.jpg "Customer Info") <br>
-Incom Window<br>
+
+<li> Income:<br>
+   - Enables administrators to monitor revenue accurately. <br>
+   - Shows customer counts and available books, with a chart for visual financial representation. <br></li>
+   
 ![Incom](IMG-20240927-WA0073.jpg "Incom") <br>
-
-
 
   </div>
 
