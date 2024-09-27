@@ -48,20 +48,20 @@ and track sales revenue.
 <div align = center>
 
 Login <br>
-![Customer Login](IMG-20240927-WA0068.jpg "Customer Login") <br>
+![Customer Login](IMG-20240927-WA0069.jpg "Customer Login") <br>
 Sign up <br>
-![Customer Sign up](image\signup.jpg "Customer Sign up")  <br>
+![Customer Sign up](IMG-20240927-WA0068.jpg "Customer Sign up")  <br>
 
 ## Dashboard Window
 
 Home Window <br>
-![Main window](image\home.jpg "Main window") <br>
+![Main window](IMG-20240927-WA0070.jpg "Main window") <br>
 Avaliable Book<br>
-![avaliable Novels](image\avl.jpg "avaliable Novels") <br>
+![avaliable Novels](IMG-20240927-WA0071.jpg "avaliable Novels") <br>
 Shopping Window <br>
-![Customer Info](image\shopping.jpg "Customer Info") <br>
+![Customer Info](IMG-20240927-WA0072.jpg "Customer Info") <br>
 Incom Window<br>
-![Incom](image\incom.jpg "Incom") <br>
+![Incom](IMG-20240927-WA0073.jpg "Incom") <br>
 
 
 
