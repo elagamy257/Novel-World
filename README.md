@@ -72,7 +72,7 @@ itextpdf-5.3.4:  <a href = "https://github.com/Rakib-Hasan-455/Hotel_Management_
 
 ## Requirements to Run this project/Jar/Exe file:
 <li>Install MySql and ensure it runs on  <b>localhost:3306</b>  .</li>
-<li><a href = ""> Download </a> 
+<li><a href = "novel.sql"> Download </a> 
  Novels World Management System Database and Install it into your MySql Database.</li>
 <li> Your Java Version Must be 8 or above.</li>
 
